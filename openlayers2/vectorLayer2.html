@@ -14,7 +14,7 @@
 
     <script type="text/javascript">
         /**
-         * GeoJSONを読み込み、ベクターレイヤで表示する。
+         * GeoJSONを読み込み、スタイルを適用しベクターレイヤで表示する。
          *
          */
 
@@ -31,7 +31,25 @@
                 displayProjection: projection4326
             });
 
-            vectors = new OpenLayers.Layer.Vector("Vector");
+            vectors = new OpenLayers.Layer.Vector("Vector",{
+                styleMap: new OpenLayers.StyleMap(
+                        {
+                            strokeColor: "#00FF00",
+                            strokeOpacity: 1,
+                            strokeWidth: 5,
+
+                            fillOpacity: 1,
+                            pointRadius: 10,
+                            fillColor: "#0000FF",
+                            fontColor: "#0000FF",
+                            label : "避難所名: ${p20_002}",
+                            labelYOffset: -20,
+                            labelXOffset: 10,
+                            labelOutlineColor: "white",
+                            labelOutlineWidth: 10
+                        })
+                    }
+                );
 
             map.addLayers([
                 new OpenLayers.Layer.XYZ("地理院地図",
